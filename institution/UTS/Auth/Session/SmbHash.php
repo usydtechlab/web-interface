@@ -136,7 +136,7 @@ var $sbox = array(array(array(14,  4, 13,  1,  2, 15, 11,  8,  3, 10,  6, 12,  5
 	/**
 	* Fixes too large numbers
 	*/
-	function x($i) {
+	private function x($i) {
 		if ($i < 0) return 4294967296 - $i;
 		else return $i;
 	}
@@ -146,7 +146,7 @@ var $sbox = array(array(array(14,  4, 13,  1,  2, 15, 11,  8,  3, 10,  6, 12,  5
 	* @param array $data
 	* @return array
 	*/
-	function lshift($count, $data) {
+	private function lshift($count, $data) {
 		$ret = array();
 		for ($i = 0; $i < sizeof($data); $i++) {
 			$ret[$i] = $data[($i + $count)%sizeof($data)];
@@ -159,7 +159,7 @@ var $sbox = array(array(array(14,  4, 13,  1,  2, 15, 11,  8,  3, 10,  6, 12,  5
 	* @param array p permutation
 	* @return array
 	*/
-	function permute($in, $p, $n) {
+	private function permute($in, $p, $n) {
 		$ret = array();
 		for ($i = 0; $i < $n; $i++) {
 			$ret[$i] = $in[$p[$i] - 1]?1:0;
@@ -172,7 +172,7 @@ var $sbox = array(array(array(14,  4, 13,  1,  2, 15, 11,  8,  3, 10,  6, 12,  5
 	* @param array $in2
 	* @return array
 	*/
-	function mxor($in1, $in2) {
+	private function mxor($in1, $in2) {
 		$ret = array();
 		for ($i = 0; $i < sizeof($in1); $i++) {
 			$ret[$i] = $in1[$i] ^ $in2[$i];
@@ -186,7 +186,7 @@ var $sbox = array(array(array(14,  4, 13,  1,  2, 15, 11,  8,  3, 10,  6, 12,  5
 	* @param boolean $forw
 	* @return array
 	*/
-	function doHash($in, $key, $forw) {
+	private function doHash($in, $key, $forw) {
 		$ki = array();
 
 		$pk1 = $this->permute($key, $this->perm1, 56);
@@ -252,7 +252,7 @@ var $sbox = array(array(array(14,  4, 13,  1,  2, 15, 11,  8,  3, 10,  6, 12,  5
 		return $this->permute($rl, $this->perm6, 64);
 	}
 
-	function str_to_key($str) {
+	private function str_to_key($str) {
 		$key[0] = $this->unsigned_shift_r($str[0], 1);
 		$key[1] = (($str[0]&0x01)<<6) | $this->unsigned_shift_r($str[1], 2);
 		$key[2] = (($str[1]&0x03)<<5) | $this->unsigned_shift_r($str[2], 3);
@@ -267,7 +267,7 @@ var $sbox = array(array(array(14,  4, 13,  1,  2, 15, 11,  8,  3, 10,  6, 12,  5
 		return $key;
 	}
 
-	function smb_hash($in, $key, $forw){
+	private function smb_hash($in, $key, $forw){
 		$key2 = $this->str_to_key($key);
 
 		for ($i = 0; $i < 64; $i++) {
@@ -287,7 +287,7 @@ var $sbox = array(array(array(14,  4, 13,  1,  2, 15, 11,  8,  3, 10,  6, 12,  5
 		return $out;
 	}
 
-	function E_P16($in) {
+	private function E_P16($in) {
 		$p14 = array_values(unpack("C*",$in));
 		$sp8 = array(0x4b, 0x47, 0x53, 0x21, 0x40, 0x23, 0x24, 0x25);
 		$p14_1 = array();
@@ -311,7 +311,7 @@ var $sbox = array(array(array(14,  4, 13,  1,  2, 15, 11,  8,  3, 10,  6, 12,  5
 	* @param string $password password
 	* @return string hash value
 	*/
-	function lmhash($password = "") {
+	private function lmhash($password = "") {
 		$password = strtoupper($password);
 		$password = substr($password,0,14);
 		$password = str_pad($password, 14, chr(0));
@@ -328,7 +328,7 @@ var $sbox = array(array(array(14,  4, 13,  1,  2, 15, 11,  8,  3, 10,  6, 12,  5
 	* @param string $password password
 	* @return string hash value
 	*/
-	function nthash($password = "") {
+	private function nthash($password = "") {
 		return strtoupper(hash("md4", iconv("UTF-8","UTF-16LE", $password), false));
 	}
 
@@ -337,7 +337,7 @@ var $sbox = array(array(array(14,  4, 13,  1,  2, 15, 11,  8,  3, 10,  6, 12,  5
 	*
 	* PHP 4 only supports signed shifts by default.
 	*/
-	function unsigned_shift_r($a, $b) {
+	private function unsigned_shift_r($a, $b) {
 		$z = 0x80000000;
 		if ($z & $a) {
 			$a = ($a >> 1);
