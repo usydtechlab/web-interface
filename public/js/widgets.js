@@ -1349,7 +1349,7 @@ GraphWidget.prototype.getHTML = function() {
             "       <div id='" + this.id + "-graph-autoscale' class='switch'>" +
             "          <div class='animated slide " + (this.isAutoscaling ? "on" : "off") + "'></div>" +
             "       </div>" +
-            "   </div>";
+            "   </div>" +
 	        "</div>";
 
 	return html;
@@ -2594,5 +2594,5 @@ Util.zeroPad = function(num, places) {
  * @return {string} the trimmed string
  */
 Util.trim = function(s) {
-    return s.trim ? s.trim() : s.replace(/^\s+|\s+$/g);
+    return s.trim ? s.trim() : s.replace(/^\s+|\s+$/g, '');
 };
