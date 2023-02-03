@@ -339,7 +339,8 @@ function DPad(pc)
 	
 	this.vel = 0.5;
 	
-	this.ping;
+	//this.ping;
+	this.ping = 0;
 	this.setTs = 0;
 }
 DPad.prototype = new IWidget;
@@ -518,7 +519,8 @@ function Ranger(pc)
 	this.scan = [];
 	
 	/* Canvas context. */
-	this.ctx;
+	// this.ctx;
+	this.ctx = null;
 	this.width = this.height = 300;
 	this.xo = this.width / 2;
 	this.yo = this.height / 2;
@@ -923,7 +925,8 @@ Ranger.prototype.drawDetails = function() {
 	this.ctx.lineTo(this.xo - 2 * size - this.xo, this.yo + size / 4 - this.yo);
 	this.ctx.lineTo(this.xo + size - this.xo, this.yo + size / 4 - this.yo);
 	this.ctx.lineTo(this.xo + size - this.xo, this.yo + size / 1.5 - this.yo);
-	this.ctx.lineTo(this.xo + 3 * size - this.xo, this.yo - this.yo);
+	// this.ctx.lineTo(this.xo + 3 * size - this.xo, this.yo - this.yo);
+	this.ctx.lineTo(this.xo + 3 * size - this.xo, 0); /* this.yo - this.yo is always zero*/
 	this.ctx.lineTo(this.xo + size - this.xo, this.yo - size / 1.5 - this.yo);
 	this.ctx.lineTo(this.xo + size - this.xo, this.yo - size / 4 - this.yo);
 	this.ctx.lineTo(this.xo - 2 * size - this.xo, this.yo - size / 4 - this.yo);
@@ -1146,7 +1149,7 @@ NavControl.prototype.setLocalized = function(localized) {
 	if (this.isLocalized)
 	{
 		$("#loc-led").removeClass("red-led").addClass("green-led");
-	}
+	}ctx
 	else
 	{
 		$("#loc-led").removeClass("green-led").addClass("red-led");
