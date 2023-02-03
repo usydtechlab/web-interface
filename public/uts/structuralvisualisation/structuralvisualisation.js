@@ -63,7 +63,9 @@ function ModelInfo(label)
 /* Initialise the values for the model from the config read at the rig client */
 function initConfig(param)
 {
-	for (j=0; j<=maxModel; j++)
+	let loopCount = this.maxModel;
+	
+	for (j=0; j<=loopCount; j++)
 	{
 		models[j] = new ModelInfo("INACTIVE");
 	}
