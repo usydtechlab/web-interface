@@ -466,7 +466,7 @@ function HydroWidget(hydroinst)
 	this.canvas = $("#hydro");
 	
 	// this.jqEle;
-	this.jqEle = $(this.id);
+	this.jqEle = jqEle;
 	
 	this.defaultCoords = "0x0";
 }
