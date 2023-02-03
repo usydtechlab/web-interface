@@ -2594,5 +2594,5 @@ Util.zeroPad = function(num, places) {
  * @return {string} the trimmed string
  */
 Util.trim = function(s) {
-    return s.trim ? s.trim() : s.replace(/^\s+|\s+$/g, '');
+    return s.trim ? s.trim() : s.replace(/(^\s+)|(\s+$)/g, '');
 };
